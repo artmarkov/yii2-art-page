@@ -1,0 +1,24 @@
+{
+  "name": "artsoft/yii2-art-page",
+  "description": "Page Module For Art CMS",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "Taras Makitra",
+      "email": "makitrataras@gmail.com"
+    },
+    {
+      "name": "Artur Markov",
+      "email": "artmarkov@mail.ru"
+    }
+  ],
+  "require": {
+    "artsoft/yii2-art-core": "dev-master",
+    "artsoft/yii2-art-media": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "artsoft\\page\\": ""
+    }
+  }
+}
