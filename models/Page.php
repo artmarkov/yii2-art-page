@@ -7,9 +7,10 @@ use artsoft\models\OwnerAccess;
 use artsoft\models\User;
 use Yii;
 use yii\behaviors\BlameableBehavior;
-use yii\behaviors\SluggableBehavior;
+use artsoft\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 use artsoft\db\ActiveRecord;
+use artsoft\behaviors\DateToTimeBehavior;
 
 /**
  * This is the model class for table "page".
@@ -37,6 +38,8 @@ class Page extends ActiveRecord implements OwnerAccess
     const COMMENT_STATUS_CLOSED = 0;
     const COMMENT_STATUS_OPEN = 1;
 
+    public $published_time;
+    
     /**
      * @inheritdoc
      */
@@ -67,9 +70,11 @@ class Page extends ActiveRecord implements OwnerAccess
         return [
             TimestampBehavior::className(),
             BlameableBehavior::className(),
-            'sluggable' => [
+            [
                 'class' => SluggableBehavior::className(),
-                'attribute' => 'title',
+                'in_attribute' => 'title',
+                'out_attribute' => 'slug',
+                'translit' => true           
             ],
             'multilingual' => [
                 'class' => MultilingualBehavior::className(),
@@ -78,6 +83,15 @@ class Page extends ActiveRecord implements OwnerAccess
                 'attributes' => [
                     'title', 'content',
                 ]
+            ],
+            [
+                'class' => DateToTimeBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_VALIDATE => 'published_time',
+                    ActiveRecord::EVENT_AFTER_FIND => 'published_time',
+                ],
+                'timeAttribute' => 'published_at',
+                'timeFormat' => 'd.m.Y',
             ],
         ];
     }
@@ -93,7 +107,7 @@ class Page extends ActiveRecord implements OwnerAccess
             [['title', 'content', 'view', 'layout'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
             [['slug'], 'string', 'max' => 200],
-            ['published_at', 'date', 'timestampAttribute' => 'published_at', 'format' => 'yyyy-MM-dd'],
+            ['published_time', 'date', 'format' => 'php:d.m.Y'],
             ['published_at', 'default', 'value' => time()],
         ];
     }
@@ -113,6 +127,7 @@ class Page extends ActiveRecord implements OwnerAccess
             'comment_status' => Yii::t('art', 'Comment Status'),
             'content' => Yii::t('art', 'Content'),
             'published_at' => Yii::t('art', 'Published'),
+            'published_time' => Yii::t('art', 'Published'),
             'created_at' => Yii::t('art', 'Created'),
             'updated_at' => Yii::t('art', 'Updated'),
             'revision' => Yii::t('art', 'Revision'),

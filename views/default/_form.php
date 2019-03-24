@@ -6,7 +6,7 @@ use artsoft\models\User;
 use artsoft\page\models\Page;
 use artsoft\widgets\ActiveForm;
 use artsoft\widgets\LanguagePills;
-use yii\jui\DatePicker;
+use kartik\date\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model artsoft\page\models\Page */
@@ -97,10 +97,8 @@ use yii\jui\DatePicker;
                 <div class="panel-body">
 
                     <div class="record-info">
-                        <?=
-                                $form->field($model, 'published_at')
-                                ->widget(DatePicker::className(), ['dateFormat' => 'yyyy-MM-dd', 'options' => ['class' => 'form-control']]);
-                        ?>
+                        
+                        <?= $form->field($model, 'published_time')->widget(DatePicker::classname())->textInput(['autocomplete' => 'off']); ?>
 
                         <?= $form->field($model, 'status')->dropDownList(Page::getStatusList()) ?>
 
