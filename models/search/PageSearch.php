@@ -14,7 +14,8 @@ class PageSearch extends Page
 {
 
     public $published_at_operand;
-
+public $date_from;
+public $date_to;
     /**
      * @inheritdoc
      */
@@ -23,6 +24,7 @@ class PageSearch extends Page
         return [
             [['id', 'created_by', 'updated_by', 'status', 'comment_status', 'revision'], 'integer'],
             [['published_at_operand', 'slug', 'title', 'content', 'published_at', 'created_at', 'updated_at'], 'safe'],
+            [['date_from', 'date_to'], 'date', 'format' => 'php:d.m.Y'],
         ];
     }
 
@@ -77,7 +79,12 @@ class PageSearch extends Page
             'revision' => $this->revision,
         ]);
 
-        $query->andFilterWhere([($this->published_at_operand) ? $this->published_at_operand : '=', 'published_at', ($this->published_at) ? strtotime($this->published_at) : null]);
+//        ($this->published_at_operand != '=') ?
+//        
+//        $query->andFilterWhere([$this->published_at_operand, 'published_at', $this->published_at ? strtotime($this->published_at) : null]) :
+        
+        $query->andFilterWhere(['>=', 'published_at', $this->date_from ? strtotime($this->date_from . ' 00:00:00') : null])
+            ->andFilterWhere(['<=', 'published_at', $this->date_to ? strtotime($this->date_to . ' 23:59:59') : null]);
 
         $query->andFilterWhere(['like', 'slug', $this->slug])
             ->andFilterWhere(['like', 'title', $this->title])
