@@ -88,36 +88,18 @@ $this->params['breadcrumbs'][] = $this->title;
                         'optionsArray' => Page::getStatusOptionsList(),
                         'options' => ['style' => 'width:60px'],
                     ],
-//                    [
-//                        'class' => 'artsoft\grid\columns\DateFilterColumn',
-//                        'attribute' => 'published_at',
-//                        'value' => function (Page $model) {
-//                            return '<span style="font-size:85%;" class="label label-'
-//                            . ((time() >= $model->published_at) ? 'primary' : 'default') . '">'
-//                            . $model->publishedDate . '</span>';
-//                        },
-//                        'format' => 'raw',
-//                        'options' => ['style' => 'width:150px'],
-//                    ],
                     [
-                    'attribute' => 'published_at',
-                    'filter' => kartik\date\DatePicker::widget([
-                        'model' => $searchModel,
-                        'attribute' => 'date_from',
-                        'attribute2' => 'date_to',
-                        'type' => kartik\date\DatePicker::TYPE_RANGE,
-                        'separator' => '-',                        
-                        'pluginOptions' => [
-                            'todayHighlight' => true,
-                            'weekStart'=>1, //неделя начинается с понедельника
-                            'autoclose'=>true,
-                            'format' => 'dd.MM.yyyy',
-                        ],
-                    ]),
-                    'format' => ['date', 'dd.MM.yyyy'],
-                    'options' => ['style' => 'width:250px','autocomplete' => 'off'],
-                        
-                ],
+                        'class' => 'artsoft\grid\columns\DateRangeFilterColumn',
+                        'attribute' => 'published_at',
+                        'attribute2' => 'published_at2',
+                        'value' => function (Page $model) {
+                            return '<span style="font-size:85%;" class="label label-'
+                            . ((time() >= $model->published_at) ? 'primary' : 'default') . '">'
+                            . $model->publishedDate . '</span>';
+                        },
+                        'format' => 'raw',
+                        'options' => ['style' => 'width:230px'],
+                    ],                    
                 ],
             ]);
             ?>
