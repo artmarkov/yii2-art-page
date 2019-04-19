@@ -102,8 +102,8 @@ use kartik\date\DatePicker;
 
                         <?= $form->field($model, 'status')->dropDownList(Page::getStatusList()) ?>
 
-                        <?php if (!$model->isNewRecord): ?>
-                            <?= $form->field($model, 'created_by')->dropDownList(User::getUsersList()) ?>
+                        <?php if (!$model->isNewRecord  && User::hasPermission('viewUsers')): ?>
+                                <?= $form->field($model, 'created_by')->dropDownList(User::getUsersList()) ?>
                         <?php endif; ?>
 
                         <?= $form->field($model, 'comment_status')->dropDownList(Page::getCommentStatusList()) ?>
