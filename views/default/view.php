@@ -6,7 +6,7 @@ use artsoft\helpers\Html;
 /* @var $model artsoft\page\models\Page */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('art/page', 'Pages'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('art/page', 'Pages'), 'url' => ['default/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="page-view">
