@@ -17,13 +17,13 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="panel-body">
             <?= Html::a(Yii::t('art', 'Edit'), ['/page/default/update', 'id' => $model->id], ['class' => 'btn btn-sm btn-primary']) ?>
             <?= Html::a(Yii::t('art', 'Delete'), ['/page/default/delete', 'id' => $model->id], [
-                'class' => 'btn btn-sm btn-default',
+                'class' => 'btn btn-sm btn-danger',
                 'data' => [
                     'confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
                     'method' => 'post',
                 ],
             ]) ?>
-            <?= Html::a(Yii::t('art', 'Add New'), ['/page/default/create'], ['class' => 'btn btn-sm btn-primary pull-right']) ?>
+            <?= Html::a(Yii::t('art', 'Add New'), ['/page/default/create'], ['class' => 'btn btn-sm btn-success pull-right']) ?>
         </div>
     </div>
 
