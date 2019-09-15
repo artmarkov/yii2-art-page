@@ -13,7 +13,8 @@ use yii\data\ActiveDataProvider;
 class PageSearch extends Page
 {
     
-    public $published_at2;
+    public $dateSearch_1;
+    public $dateSearch_2;
     
     /**
      * @inheritdoc
@@ -22,8 +23,8 @@ class PageSearch extends Page
     {
         return [
             [['id', 'created_by', 'updated_by', 'status', 'comment_status', 'revision'], 'integer'],
-            [['slug', 'title', 'content', 'published_at', 'published_at2', 'created_at', 'updated_at'], 'safe'],
-            [['published_at2'], 'date', 'format' => 'php:d.m.Y'],
+            [['slug', 'title', 'content', 'published_at', 'dateSearch_1', 'dateSearch_2', 'created_at', 'updated_at', 'publishedDate'], 'safe'],
+            [['dateSearch_1', 'dateSearch_2'], 'date', 'format' => 'php:d.m.Y'],
         ];
     }
 
@@ -78,8 +79,8 @@ class PageSearch extends Page
             'revision' => $this->revision,
         ]);
         
-        $query->andFilterWhere(['>=', 'published_at', $this->published_at ? strtotime($this->published_at . ' 00:00:00') : null])
-            ->andFilterWhere(['<=', 'published_at', $this->published_at2 ? strtotime($this->published_at2 . ' 23:59:59') : null]);
+        $query->andFilterWhere(['>=', 'published_at', $this->dateSearch_1 ? strtotime($this->dateSearch_1 . ' 00:00:00') : null])
+            ->andFilterWhere(['<=', 'published_at', $this->dateSearch_2 ? strtotime($this->dateSearch_2 . ' 23:59:59') : null]);
 
         $query->andFilterWhere(['like', 'slug', $this->slug])
             ->andFilterWhere(['like', 'title', $this->title])

@@ -90,13 +90,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'class' => 'artsoft\grid\columns\DateRangeFilterColumn',
-                        'attribute' => 'published_at',
-                        'attribute2' => 'published_at2',
+                        'attribute' => 'dateSearch_1',
+                        'attribute2' => 'dateSearch_2',
                         'value' => function (Page $model) {
                             return '<span style="font-size:85%;" class="label label-'
                             . ((time() >= $model->published_at) ? 'primary' : 'default') . '">'
                             . $model->publishedDate . '</span>';
                         },
+                        'label' => Yii::t('art', 'Published'),
                         'format' => 'raw',
                         'options' => ['style' => 'width:230px'],
                     ],                    
