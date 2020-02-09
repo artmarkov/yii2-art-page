@@ -59,10 +59,8 @@ use kartik\date\DatePicker;
         <div class="panel-footer">
             <div class="form-group">
                 <?= Html::a(Yii::t('art', 'Go to list'), ['/page/default/index'], ['class' => 'btn btn-default',]) ?>
-                <?php if ($model->isNewRecord): ?>
-                    <?= Html::submitButton(Yii::t('art', 'Create'), ['class' => 'btn btn-primary']) ?>
-                <?php else: ?>
-                    <?= Html::submitButton(Yii::t('art', 'Save'), ['class' => 'btn btn-primary']) ?>
+                <?= Html::submitButton(Yii::t('art', 'Save'), ['class' => 'btn btn-primary']) ?>
+                <?php if (!$model->isNewRecord): ?>
                     <?= Html::a(Yii::t('art', 'Delete'), ['/page/default/delete', 'id' => $model->id], [
                         'class' => 'btn btn-danger ',
                         'data' => [
@@ -71,16 +69,15 @@ use kartik\date\DatePicker;
                         ],
                     ])
                     ?>
-                    <?= Html::a(Yii::t('art', 'Add New'), ['/page/default/create'], ['class' => 'btn btn-sm btn-success pull-right']) ?>
-
                 <?php endif; ?>
+                <?= Html::a(Yii::t('art', 'Add New'), ['/page/default/create'], ['class' => 'btn btn-sm btn-success pull-right']) ?>
             </div>
             <?php if (!$model->isNewRecord): ?>
                 <div class="text-default text-muted small">
-                    <span><strong><?= $model->attributeLabels()['id'] ?? ''?></strong> : <?= $model->id ?? ''?></span>
-                    <span><strong><?= $model->attributeLabels()['created_at'] ?? ''?></strong> : <?= $model->createdDatetime ?? '' ?>
+                    <span><strong><?= $model->attributeLabels()['id'] ?? '' ?></strong> : <?= $model->id ?? '' ?></span>
+                    <span><strong><?= $model->attributeLabels()['created_at'] ?? '' ?></strong> : <?= $model->createdDatetime ?? '' ?>
                         <?= $model->createdBy->username ?? '' ?></span>
-                    <span><strong><?= $model->attributeLabels()['updated_at'] ?? ''?></strong> : <?= $model->updatedDatetime ?? '' ?>
+                    <span><strong><?= $model->attributeLabels()['updated_at'] ?? '' ?></strong> : <?= $model->updatedDatetime ?? '' ?>
                         <?= $model->updatedBy->username ?? '' ?></span>
                 </div>
             <?php endif; ?>
