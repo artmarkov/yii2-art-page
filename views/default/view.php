@@ -23,15 +23,15 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="panel-footer">
             <div class="form-group">
                 <?= Html::a(Yii::t('art', 'Go to list'), ['/page/default/index'], ['class' => 'btn btn-default',]) ?>
-                <?= Html::a(Yii::t('art', 'Edit'), ['/page/default/update', 'id' => $model->id], ['class' => 'btn btn-sm btn-primary']) ?>
+                <?= Html::a(Yii::t('art', 'Edit'), ['/page/default/update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                 <?= Html::a(Yii::t('art', 'Delete'), ['/page/default/delete', 'id' => $model->id], [
-                    'class' => 'btn btn-sm btn-danger',
+                    'class' => 'btn btn-danger',
                     'data' => [
                         'confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
                         'method' => 'post',
                     ],
                 ]) ?>
-                <?= Html::a(Yii::t('art', 'Add New'), ['/page/default/create'], ['class' => 'btn btn-sm btn-success pull-right']) ?>
+                <?= Html::a(Yii::t('art', 'Add New'), ['/page/default/create'], ['class' => 'btn btn-success pull-right']) ?>
             </div>
             <div class="text-default text-muted small">
                 <span><strong><?= $model->attributeLabels()['id'] ?? '' ?></strong> : <?= $model->id ?? '' ?></span>

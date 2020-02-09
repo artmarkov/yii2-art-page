@@ -70,7 +70,7 @@ use kartik\date\DatePicker;
                     ])
                     ?>
                 <?php endif; ?>
-                <?= Html::a(Yii::t('art', 'Add New'), ['/page/default/create'], ['class' => 'btn btn-sm btn-success pull-right']) ?>
+                <?= Html::a(Yii::t('art', 'Add New'), ['/page/default/create'], ['class' => 'btn btn-success pull-right']) ?>
             </div>
             <?php if (!$model->isNewRecord): ?>
                 <div class="text-default text-muted small">
