@@ -70,17 +70,8 @@ use kartik\date\DatePicker;
                     ])
                     ?>
                 <?php endif; ?>
-                <?= Html::a(Yii::t('art', 'Add New'), ['/page/default/create'], ['class' => 'btn btn-success pull-right']) ?>
             </div>
-            <?php if (!$model->isNewRecord): ?>
-                <div class="text-default text-muted small">
-                    <span><strong><?= $model->attributeLabels()['id'] ?? '' ?></strong> : <?= $model->id ?? '' ?></span>
-                    <span><strong><?= $model->attributeLabels()['created_at'] ?? '' ?></strong> : <?= $model->createdDatetime ?? '' ?>
-                        <?= $model->createdBy->username ?? '' ?></span>
-                    <span><strong><?= $model->attributeLabels()['updated_at'] ?? '' ?></strong> : <?= $model->updatedDatetime ?? '' ?>
-                        <?= $model->updatedBy->username ?? '' ?></span>
-                </div>
-            <?php endif; ?>
+            <?= \artsoft\widgets\InfoModel::widget(['model'=>$model]); ?>
         </div>
     </div>
     <?php ActiveForm::end(); ?>
